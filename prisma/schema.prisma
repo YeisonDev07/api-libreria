@@ -12,21 +12,46 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
+}                              
 
 model Usuario {
-  id         Int       @id @default(autoincrement())
-  nombre     String
-  correo     String    @unique
-  edad       Int
-  libros     Libro[]   @relation("UsuarioLibros")
-  creadoEn   DateTime  @default(now())
+  id            Int         @id @default(autoincrement())
+  nombre        String
+  correo        String      @unique
+  edad          Int
+  prestamos     Prestamo[]  // préstamos realizados por el usuario
+  creadoEn      DateTime    @default(now())
+  actualizadoEn DateTime   @updatedAt
 }
 
 model Libro {
-  id         Int       @id @default(autoincrement())
-  titulo     String
-  autor      String
-  usuarios   Usuario[] @relation("UsuarioLibros")
-  creadoEn   DateTime  @default(now())
+  id            Int          @id @default(autoincrement())
+  titulo        String
+  autor         String
+  ejemplares    Ejemplar[]   // relación con los ejemplares físicos
+  creadoEn      DateTime     @default(now())
+  actualizadoEn DateTime    @updatedAt
+}
+
+model Ejemplar {
+  id            Int          @id @default(autoincrement())
+  libro         Libro        @relation(fields: [libroId], references: [id])
+  libroId       Int
+  disponible    Boolean      @default(true)
+  prestamos     Prestamo[]   // historial de préstamos
+  creadoEn      DateTime     @default(now())
+  actualizadoEn DateTime    @updatedAt
+}
+
+model Prestamo {
+  id            Int          @id @default(autoincrement())
+  usuario       Usuario      @relation(fields: [usuarioId], references: [id])
+  usuarioId     Int
+  ejemplar      Ejemplar     @relation(fields: [ejemplarId], references: [id])
+  ejemplarId    Int
+  fechaInicio   DateTime     @default(now())
+  fechaFin      DateTime?
+  devuelto      Boolean      @default(false)
+  creadoEn      DateTime     @default(now())
+  actualizadoEn DateTime     @updatedAt
 }
