@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { LoggingInterceptor } from './common/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,8 @@ async function bootstrap() {
       transform: true, // convierte automáticamente a los tipos definidos en el DTO
     }),
   );
+  
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   // ✅ Configurar Swagger para documentación de API
   const config = new DocumentBuilder()

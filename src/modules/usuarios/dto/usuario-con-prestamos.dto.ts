@@ -15,7 +15,7 @@ class EjemplarDto {
 class PrestamoDto {
   @ApiProperty() id: number;
   @ApiProperty() fechaInicio: Date;
-  @ApiProperty() fechaFin?: Date;
+  @ApiProperty({ nullable: true }) fechaFin: Date | null;
   @ApiProperty() devuelto: boolean;
   @ApiProperty({ type: EjemplarDto }) ejemplar: EjemplarDto;
 }
