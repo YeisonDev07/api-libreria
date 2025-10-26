@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { UsuarioService } from 'src/modules/usuario';
+import { UsuarioService } from 'src/modules/usuarios';
 
 @Controller('usuario')
 export class UsuarioController {
