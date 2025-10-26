@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// Aqui solo se pone el provider y se debe de cambiar el nombre del archivo por "prisma-client-js".
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id         Int       @id @default(autoincrement())
+  nombre     String
+  correo     String    @unique
+  edad       Int
+  libros     Libro[]   @relation("UsuarioLibros")
+  creadoEn   DateTime  @default(now())
+}
+
+model Libro {
+  id         Int       @id @default(autoincrement())
+  titulo     String
+  autor      String
+  usuarios   Usuario[] @relation("UsuarioLibros")
+  creadoEn   DateTime  @default(now())
+}
