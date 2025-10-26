@@ -21,7 +21,7 @@ model Usuario {
   edad          Int
   prestamos     Prestamo[]  // préstamos realizados por el usuario
   creadoEn      DateTime    @default(now())
-  actualizadoEn DateTime   @updatedAt
+  actualizadoEn DateTime    @updatedAt
 }
 
 model Libro {
@@ -30,7 +30,7 @@ model Libro {
   autor         String
   ejemplares    Ejemplar[]   // relación con los ejemplares físicos
   creadoEn      DateTime     @default(now())
-  actualizadoEn DateTime    @updatedAt
+  actualizadoEn DateTime     @updatedAt
 }
 
 model Ejemplar {
@@ -40,7 +40,7 @@ model Ejemplar {
   disponible    Boolean      @default(true)
   prestamos     Prestamo[]   // historial de préstamos
   creadoEn      DateTime     @default(now())
-  actualizadoEn DateTime    @updatedAt
+  actualizadoEn DateTime     @updatedAt
 }
 
 model Prestamo {
