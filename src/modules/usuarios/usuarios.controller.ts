@@ -8,7 +8,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { UsuarioService } from 'src/modules/usuarios';
+import { UsuariosService } from 'src/modules/usuarios';
 import {
   CrearUsuarioDto,
   ActualizarUsuarioDto,
@@ -16,8 +16,8 @@ import {
 } from 'src/modules/usuarios/dto';
 
 @Controller('usuario')
-export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+export class UsuariosController {
+  constructor(private readonly usuarioService: UsuariosService) {}
 
   @Get()
   obtenerUsuarios(

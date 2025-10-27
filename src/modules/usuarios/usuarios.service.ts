@@ -17,8 +17,8 @@ interface ObtenerUsuariosOptions {
 }
 
 @Injectable()
-export class UsuarioService {
-  private readonly logger = new Logger(UsuarioService.name);
+export class UsuariosService {
+  private readonly logger = new Logger(UsuariosService.name);
 
   constructor(private prisma: PrismaService) {}
 
